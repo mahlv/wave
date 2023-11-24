@@ -27,15 +27,16 @@ final userDetailsProvider = FutureProvider.family((ref, String uid) {
   return authController.getUserData(uid);
 });
 
+final currentUserDetailProvider = FutureProvider.autoDispose((ref) async {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return await authController.getCurrentUserData();
+});
+
 final currentUserAccountProvider = FutureProvider((ref) {
   final authController = ref.watch(authControllerProvider.notifier);
   return authController.currentUser();
 });
 
-final currentUserDetailProvider = FutureProvider.autoDispose((ref) async {
-  final authController = ref.watch(authControllerProvider.notifier);
-  return await authController.getCurrentUserData();
-});
 
 class AuthController extends StateNotifier<bool> {
   final AuthAPI _authAPI;
