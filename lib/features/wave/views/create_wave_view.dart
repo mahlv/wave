@@ -69,6 +69,7 @@ class _CreateWaveScreenState extends ConsumerState<CreateWaveScreen> {
       }
       if (isRecording) {
         await _soundRecorder!.stopRecorder();
+
       } else {
         await _soundRecorder!.startRecorder(
           toFile: path,
